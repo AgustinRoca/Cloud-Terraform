@@ -1,0 +1,32 @@
+swagger: '2.0'
+info:
+  title: cloud-stylegan-api
+  description: API Gateway for Cloud StyleGAN
+  version: 1.0.0
+schemes:
+  - https
+produces:
+  - application/json
+paths:
+  /api/images-service:
+    get:
+      summary: images-service
+      operationId: images-service
+      x-google-backend:
+        address: ${images_service_url}
+      responses:
+        200:
+          description: Successful response
+          schema:
+              type: string
+  /api/gpu-service:
+    get:
+      summary: gpu-service
+      operationId: gpu-service
+      x-google-backend:
+        address: ${gpu_service_url}
+      responses:
+        200:
+          description: Successful response
+          schema:
+              type: string
