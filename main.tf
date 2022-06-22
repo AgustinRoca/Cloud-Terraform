@@ -13,7 +13,7 @@ provider "google" {
   zone = "us-central1-c"
   # este lo sacamos de cuando creamos el proyecto
   # hay que hacer un service account en create key elegir json
-  credentials = "${file("service-acount.json")}"
+  credentials = "${file("innocenceproject.json")}"
 }
 
 # Create a new project under the billing account
@@ -30,13 +30,15 @@ resource "google_project_iam_member" "owner" {
   project = google_project.project.project_id
 }
 
+#Add editor users
 resource "google_project_iam_binding" "project" {
   project = var.project
   role    = "roles/editor"
 
   members = [
     "user:ltorrusio@itba.edu.ar",
-    "user:lucidiaz@itba.edu.ar"
+    "user:lucidiaz@itba.edu.ar",
+    "user:nbritos@itba.edu.ar"
   ]
 
   # condition {
