@@ -19,5 +19,7 @@ variable "zones" {
 variable "credentials_file" {
   description = "Credentials file path"
   type        = string
-  default     = "credentials.json"
+  default     = "innocenceproject.json"
 }
+
+# los que son unicos quiza mejor hacodeado

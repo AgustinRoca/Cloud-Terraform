@@ -22,7 +22,7 @@ module "subnet" {
 
 module "bucket" {
   source         = "./modules/bucket"
-  bucket_name    = "www.innocenceproject.com"
+  bucket_name    = "innocenceproject"
   storage_class  = "STANDARD"
   resources      = "./resources"
   certificate    = local.ssl.certificate.filename

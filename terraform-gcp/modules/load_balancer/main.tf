@@ -1,8 +1,3 @@
-# module "load-balancer_internal-load-balancer" {
-#   source  = "gruntwork-io/load-balancer/google//modules/internal-load-balancer"
-#   version = "0.1.2"
-#   # insert the 6 required variables here
-# }
 
 # # Proxy-only subnet
 # resource "google_compute_subnetwork" "proxy_subnet" {
