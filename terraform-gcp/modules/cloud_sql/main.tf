@@ -36,9 +36,7 @@ resource "google_compute_global_address" "private_ip_address" {
   address = "10.4.0.0"
 }
 
-################################
-# conexion privada a cloud sql #  (comentar para poder hacer el terraform apply, ya que lanza error 403)
-################################
+# conexion privada a cloud sql (comentar para poder hacer el terraform apply, ya que lanza error 403)
 # resource "google_service_networking_connection" "private_vpc_connection" {
 #   network                 = var.vpc_self_link
 #   service                 = "servicenetworking.googleapis.com"
