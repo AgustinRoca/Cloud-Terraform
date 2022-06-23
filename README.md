@@ -4,8 +4,6 @@ Archivos Terraform (Infrastracture as Code) que permiten desplegar algunos de lo
 ## Pasos
 `$> cd terraform-gcp`
 
-`$> gcloud auth application-default login`
-
 `$> terraform init`
 
 `$> terraform validate`
