@@ -8,7 +8,7 @@ resource "google_compute_network" "vpc" {
 resource "google_project_service" "vpcaccess_api" {
   service  = "vpcaccess.googleapis.com"
   provider = google-beta
-  disable_on_destroy = false
+  disable_on_destroy = true
 }
 
 # VPC access connector
