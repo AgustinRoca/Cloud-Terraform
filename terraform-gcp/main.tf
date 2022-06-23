@@ -105,9 +105,9 @@ module "gpu" {
 
   #VARIABLES
   name                           = "gpu-instance"
-  machine_type                   = "a2-highgpu-1g"
+  machine_type                   = "n1-standard-4"
   network                        = "default"
-  source_image                   = "ubuntu-os-cloud/ubuntu-1804-lts"
+  source_image                   = "debian-cloud/debian-10"
   health_check_name              = "autohealing-health-check"
   auto_delete                    = true
   boot                           = true

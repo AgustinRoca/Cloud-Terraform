@@ -45,7 +45,7 @@ resource "google_storage_bucket" "bucket" {
 resource "google_storage_bucket_access_control" "public_rule" {
   bucket = google_storage_bucket.bucket.name
   role   = "READER"
-  entity = "allUsers"
+  entity = "allAuthenticatedUsers"
   depends_on = [
     google_storage_bucket.bucket
   ]

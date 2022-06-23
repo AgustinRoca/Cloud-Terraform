@@ -86,3 +86,9 @@ variable "region" {
   type        = string
   default     = "us-central1"
 }
+
+variable "worker_gpu" {
+  description = "GPU model to be used by each machine"
+  type        = string
+  default     = "nvidia-tesla-t4"
+}
