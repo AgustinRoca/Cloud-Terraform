@@ -1,6 +1,8 @@
+# Esto crea un MIG de GPUs 
+
 # Compute Engine Template
 resource "google_compute_instance_template" "gpu_instance" {
-    name = var.name
+    name = var.gpu_template_name
     machine_type = var.machine_type
 
     network_interface {
@@ -11,13 +13,13 @@ resource "google_compute_instance_template" "gpu_instance" {
 
     disk {
         source_image = var.source_image
-        auto_delete = var.auto_delete
-        boot = var.boot
+        auto_delete = true
+        boot = true
         disk_size_gb = 10
     }
 
-    guest_accelerator {
-        type = var.worker_gpu
+    guest_accelerator { # GPU
+        type = var.gpu_model
         count = 1
     }
 
@@ -26,25 +28,10 @@ resource "google_compute_instance_template" "gpu_instance" {
     }
 }
 
-# Health check
-resource "google_compute_health_check" "autohealing" {
-  name                = var.health_check_name
-  check_interval_sec  = var.check_interval_sec
-  timeout_sec         = var.timeout_sec
-  healthy_threshold   = var.healthy_threshold
-  unhealthy_threshold = var.unhealthy_threshold
-
-  http_health_check {
-    request_path = var.health_request_path
-    port         = var.health_request_port
-  }
-}
-
 # MIG - GPUs
 resource "google_compute_region_instance_group_manager" "mig_gpus"{
     name = var.mig_name
-    
-    base_instance_name = "gpu-instance"
+    base_instance_name = var.instance_name
 
     version {
         instance_template = "${google_compute_instance_template.gpu_instance.self_link}"
@@ -56,8 +43,8 @@ resource "google_compute_region_instance_group_manager" "mig_gpus"{
     target_size = 3
 
     auto_healing_policies {
-        health_check      = google_compute_health_check.autohealing.id
-        initial_delay_sec = var.auto_healing_initial_delay_sec
+        health_check      = var.autohealing_id
+        initial_delay_sec = 300
     }
 
 }

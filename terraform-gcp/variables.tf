@@ -1,25 +1,17 @@
 variable "project_name" {
-  description = "Project Name/ID"
+  description = "Name of the project"
   type        = string
   default     = "innocenceproject-354123"
 }
 
 variable "region" {
-  description = "Region where every regional resource will be"
+  description = "Region to use"
   type        = string
   default     = "us-central1"
 }
 
 variable "zones" {
-  description = "Zones where every regional resource will be"
+  description = "All the zones inside the region to use"
   type        = list(string)
   default     = ["us-central1-a", "us-central1-b", "us-central1-c"]
 }
-
-variable "credentials_file" {
-  description = "Credentials file path"
-  type        = string
-  default     = "innocenceproject.json"
-}
-
-# los que son unicos quiza mejor hacodeado
