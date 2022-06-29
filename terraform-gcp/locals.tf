@@ -1,3 +1,3 @@
 locals {
-    app_name = "innocenceproject"
+  app_name = "innocenceproject"
 }

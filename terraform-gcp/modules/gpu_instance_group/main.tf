@@ -2,49 +2,49 @@
 
 # Compute Engine Template
 resource "google_compute_instance_template" "gpu_instance" {
-    name = var.gpu_template_name
-    machine_type = var.machine_type
+  name         = var.gpu_template_name
+  machine_type = var.machine_type
 
-    network_interface {
-        network = var.network
-        access_config {
-        }
+  network_interface {
+    network = var.network
+    access_config {
     }
+  }
 
-    disk {
-        source_image = var.source_image
-        auto_delete = true
-        boot = true
-        disk_size_gb = 10
-    }
+  disk {
+    source_image = var.source_image
+    auto_delete  = true
+    boot         = true
+    disk_size_gb = 10
+  }
 
-    guest_accelerator { # GPU
-        type = var.gpu_model
-        count = 1
-    }
+  guest_accelerator { # GPU
+    type  = var.gpu_model
+    count = 1
+  }
 
-    scheduling {
-        on_host_maintenance = "TERMINATE"
-    }
+  scheduling {
+    on_host_maintenance = "TERMINATE"
+  }
 }
 
 # MIG - GPUs
-resource "google_compute_region_instance_group_manager" "mig_gpus"{
-    name = var.mig_name
-    base_instance_name = var.instance_name
+resource "google_compute_region_instance_group_manager" "mig_gpus" {
+  name               = var.mig_name
+  base_instance_name = var.instance_name
 
-    version {
-        instance_template = "${google_compute_instance_template.gpu_instance.self_link}"
-    }
+  version {
+    instance_template = google_compute_instance_template.gpu_instance.self_link
+  }
 
-    region                     = var.region
-    distribution_policy_zones  = var.zones
+  region                    = var.region
+  distribution_policy_zones = var.zones
 
-    target_size = 3
+  target_size = 3
 
-    auto_healing_policies {
-        health_check      = var.autohealing_id
-        initial_delay_sec = 300
-    }
+  auto_healing_policies {
+    health_check      = var.autohealing_id
+    initial_delay_sec = 300
+  }
 
 }

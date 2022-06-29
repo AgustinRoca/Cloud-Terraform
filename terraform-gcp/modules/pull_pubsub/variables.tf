@@ -1,9 +1,9 @@
 variable "topic_name" {
-    description = "Topic name to publish"
-    type = string
+  description = "Topic name to publish"
+  type        = string
 }
 
 variable "subscription_name" {
-    description = "Subscription name for subscribers"
-    type = string
+  description = "Subscription name for subscribers"
+  type        = string
 }
