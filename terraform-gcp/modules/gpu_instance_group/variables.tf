@@ -47,3 +47,8 @@ variable "autohealing_id" {
   description = "Id of health check to use in this MIG"
   type        = string
 }
+
+variable "service_account_email" {
+  description = "Email for service accounts for IAM"
+  type        = string
+}

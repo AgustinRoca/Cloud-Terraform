@@ -1,3 +1,9 @@
+# Custom Service Account que se usa para identificar servicios de Google para IAM (manera recomendada por Google)
+resource "google_service_account" "default" {
+  account_id   = "service-account-id"
+  display_name = "Service Account"
+}
+
 module "health_check" {
   source = "./modules/health_check"
 
@@ -26,6 +32,9 @@ module "gpu_instance_group" {
   # Health
   autohealing_id = module.health_check.id
   depends_on     = [module.health_check] # Necesito un health check para linkearlo con el MIG
+
+  # IAM
+  service_account_email = google_service_account.default.email
 }
 
 module "pull_pubsub" {
@@ -33,4 +42,10 @@ module "pull_pubsub" {
 
   topic_name        = "To-Do"
   subscription_name = "tasks-subscription"
+}
+
+module "container_registry" {
+  source = "./modules/container_registry"
+
+  project_id = var.project_name
 }
