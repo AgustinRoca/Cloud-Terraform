@@ -63,3 +63,12 @@ module "cloud_function" {
   memory_mb         = 128
   entry_point       = "sendWarningMail"
 }
+
+# TODO: More variables
+
+module "network" {
+  source                                 = "./modules/network"
+  project_name                           = var.project_name
+  region                                 = var.region
+  name_prefix                            = var.project_name # TODO
+}
