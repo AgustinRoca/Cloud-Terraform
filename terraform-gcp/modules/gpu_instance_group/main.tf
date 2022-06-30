@@ -29,7 +29,7 @@ resource "google_compute_instance_template" "gpu_instance" {
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    # Necesario para que pueda acceder a otros servicios 
+    # Necesario para que pueda acceder a otros servicios (Containers, Buckets, SQL DBs, PubSub)
     email  = var.service_account_email
     scopes = ["cloud-platform"]
   }

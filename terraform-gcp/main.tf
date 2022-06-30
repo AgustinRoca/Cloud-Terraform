@@ -56,7 +56,7 @@ module "cloud_function" {
   code_bucket_name  = "code-bucket"
   region            = var.region
   scripts_file_name = "warning_trigger.py" # Si son varios scripts, puede ser un .zip
-  scripts_path      = "resources/warning_trigger_scripts"
+  scripts_path      = "./resources/warning_trigger_scripts"
   name              = "warning-email"
   description       = "Sends an email to project owners if it detects too many requests from an user"
   code_language     = "python39" # Python 3.9
