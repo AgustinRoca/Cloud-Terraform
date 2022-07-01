@@ -8,6 +8,17 @@ resource "google_storage_bucket" "input_bucket" {
   name     = "images-${var.project_name}"
   location = var.region
   force_destroy = true
+  
+  # If an object is 30 days old it passes to Coldline
+  lifecycle_rule {
+    condition {
+      age = 30
+    }
+    action {
+      type = "SetStorageClass"
+      storage_class = "COLDLINE"
+    }
+  }
 }
 
 
