@@ -6,7 +6,7 @@ resource "google_compute_instance_template" "gpu_instance" {
   machine_type = var.machine_type
 
   network_interface {
-    network = var.network
+    subnetwork = var.network
     access_config {
     }
   }

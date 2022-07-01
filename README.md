@@ -2,13 +2,20 @@
 Archivos Terraform (Infrastracture as Code) que permiten desplegar algunos de los recursos de la arquitectura planteada en el TP2.
 
 ## Pasos
+
 `$> cd terraform-gcp`
 
+`$> gcloud auth login`
+
 `$> terraform init`
+
+`$> terraform init -upgrade`
 
 `$> terraform validate`
 
 `$> terraform plan`
+
+To add storage permissions, run `$> gcloud projects add-iam-policy-binding <PROJECT-ID> --member='user:<USER_ACCOUNT>' --role='storage.admin'`
 
 `$> terraform apply`
 

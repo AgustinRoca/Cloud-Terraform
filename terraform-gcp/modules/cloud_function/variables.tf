@@ -54,3 +54,8 @@ variable "environment_variables" {
   type        = map(any)
   default     = {}
 }
+
+variable "project_name" {
+  description = "The project ID for the network"
+  type        = string
+}

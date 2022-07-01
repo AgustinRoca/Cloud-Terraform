@@ -45,6 +45,8 @@ module "lb-http" {
       }
     }
   }
+
+  depends_on = [google_project_service.gcp_services]
 }
 
 # Network Endpoint Groups (NEGs)
@@ -63,6 +65,8 @@ resource "google_compute_region_network_endpoint_group" "neg" {
       service = cloud_run.value.service
     }
   }
+
+  depends_on = [google_project_service.gcp_services]
 
 }
 
@@ -98,5 +102,7 @@ resource "google_compute_url_map" "url-map" {
       }
     }
   }
-}
 
+  depends_on = [google_project_service.gcp_services]
+
+}

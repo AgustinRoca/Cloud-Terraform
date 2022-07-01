@@ -1,7 +1,7 @@
 variable "project_name" {
   description = "Name of the project"
   type        = string
-  default     = "innocenceproject-3541231"
+  default     = "innocenceproject-355016"
 }
 
 variable "region" {
@@ -20,4 +20,15 @@ variable "gpus_cidr" {
   description = "IP CIDR range for GPU MIG subnet"
   type        = string
   default     = "10.0.0.0/24"
+}
+
+variable "gcp_service_list" {
+  description = "The list of apis necessary for the project"
+  type        = list(string)
+  default = [
+    "compute.googleapis.com",
+    "cloudfunctions.googleapis.com",
+    "containerregistry.googleapis.com",
+    "cloudbuild.googleapis.com"
+  ]
 }
