@@ -23,7 +23,7 @@ def sendWarningMail(arg1, arg2):
 
     # initialise message instance
     msg = MIMEMultipart()
-    msg["Subject"] = "Image added in bucket on date {}".format(today_date)
+    msg["Subject"] = "New object in bucket on date {}".format(today_date)
     msg["From"] = sender_email
     msg['To'] = ", ".join(receiver_email)
 
@@ -39,18 +39,16 @@ def sendWarningMail(arg1, arg2):
     <body>
         <p>Hi,<br>
         <br>
-        New event:
-        Date:{}
-        Bucket: {}
-        Object added: {}
-        <br>
+        This is to inform a new event<br><br> date: {},<br><br> bucket:  {},<br><br> added object: {} <br><br>
         Thank you. <br>
         </p>
     </body>
     </html>
     """
+    data_arg1 = json.loads(arg1)
+    data_arg2 = json.loads(arg2)
 
-    body_html = MIMEText(html.format(today_date, arg1['bucket'], arg2['resource']['name']), 'html')  # parse values into html text
+    body_html = MIMEText(html.format(today_date, data_arg1['bucket'], data_arg2['resource']['name']), 'html')  # parse values into html text
     msg.attach(body_html)  # attaching the text body into msg
 
     ## Image
