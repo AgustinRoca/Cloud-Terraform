@@ -5,19 +5,17 @@ resource "google_service_account" "default" {
 }
 
 module "health_check" {
-  source = "./modules/health_check"
+  source = "../modules/health_check"
 
   health_check_name   = "gpu-autohealing-health-check"
   health_request_path = "/health"
   health_request_port = "8080"
 }
 
-module "gpu_instance_group" {
-  source = "./modules/gpu_instance_group"
+module "gpu_instance" {
+  source = "../modules/gpu_instance"
 
   gpu_template_name = "gpu-template"
-  mig_name          = "mig-gpus"
-  instance_name     = "gpu-instance"
 
   # Specs
   machine_type = "n1-standard-4"
@@ -26,32 +24,42 @@ module "gpu_instance_group" {
 
   # Networking
   network = "default"
+
+  # IAM
+  service_account_email = google_service_account.default.email
+}
+
+module "gpu_instance_group" {
+  source = "../modules/gpu_instance_group"
+
+  mig_name          = "mig-gpus"
+  instance_name     = "gpu-instance"
+  instance = module.gpu_instance.instance
+
+  # Networking
   region  = var.region
   zones   = var.zones
 
   # Health
   autohealing_id = module.health_check.id
   depends_on     = [module.health_check] # Necesito un health check para linkearlo con el MIG
-
-  # IAM
-  service_account_email = google_service_account.default.email
 }
 
 module "pull_pubsub" {
-  source = "./modules/pull_pubsub"
+  source = "../modules/pull_pubsub"
 
   topic_name        = "To-Do"
   subscription_name = "tasks-subscription"
 }
 
 module "container_registry" {
-  source = "./modules/container_registry"
+  source = "../modules/container_registry"
 
   project_id = var.project_name
 }
 
 module "cloud_function" {
-  source = "./modules/cloud_function"
+  source = "../modules/cloud_function"
 
   code_bucket_name  = "code-bucket"
   region            = var.region
@@ -64,10 +72,8 @@ module "cloud_function" {
   entry_point       = "sendWarningMail"
 }
 
-# TODO: More variables
-
 module "network" {
-  source                                 = "./modules/network"
+  source                                 = "../modules/network"
   project_name                           = var.project_name
   region                                 = var.region
   name_prefix                            = var.project_name # TODO
