@@ -5,17 +5,17 @@
 
 # Bucket de ejemplo que triggerea el evento
 resource "google_storage_bucket" "input_bucket" {
-  name     = "images-${var.project_name}"
-  location = var.region
+  name          = "images-${var.project_name}"
+  location      = var.region
   force_destroy = true
-  
+
   # If an object is 30 days old it passes to Coldline
   lifecycle_rule {
     condition {
       age = 30
     }
     action {
-      type = "SetStorageClass"
+      type          = "SetStorageClass"
       storage_class = "COLDLINE"
     }
   }
@@ -33,12 +33,12 @@ data "google_iam_policy" "owner" {
 }
 
 resource "google_storage_bucket_iam_policy" "policy-1" {
-  bucket = google_storage_bucket.input_bucket.name
+  bucket      = google_storage_bucket.input_bucket.name
   policy_data = data.google_iam_policy.owner.policy_data
 }
 
 resource "google_storage_bucket_iam_policy" "policy-2" {
-  bucket = google_storage_bucket.code_bucket.name
+  bucket      = google_storage_bucket.code_bucket.name
   policy_data = data.google_iam_policy.owner.policy_data
 }
 

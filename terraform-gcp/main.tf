@@ -1,12 +1,12 @@
 resource "google_project_service" "gcp_services" {
-  for_each = toset(var.gcp_service_list)
-  project  = var.project_name
-  service  = each.key
+  for_each           = toset(var.gcp_service_list)
+  project            = var.project_name
+  service            = each.key
   disable_on_destroy = false
 }
 
 resource "google_compute_network" "net" {
-  name = "main-network"
+  name       = "main-network"
   depends_on = [google_project_service.gcp_services]
 }
 
@@ -62,7 +62,7 @@ module "gpu_instance_group" {
 
   # Necesito un health check para linkearlo con el MIG
   # También la subnetwork
-  depends_on     = [module.health_check, google_compute_subnetwork.subnet] 
+  depends_on = [module.health_check, google_compute_subnetwork.subnet]
 }
 
 module "pull_pubsub" {
