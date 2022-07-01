@@ -18,7 +18,7 @@ variable "db_subnetwork" {
   type        = string
 }
 
-variable "project" {
+variable "project_name" {
   description = "The project to create the firewall rules in. Must match the network project."
   type        = string
 }

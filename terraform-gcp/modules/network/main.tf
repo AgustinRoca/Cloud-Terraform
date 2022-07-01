@@ -63,9 +63,38 @@ resource "google_compute_subnetwork" "vpc_subnetwork_db" {
 module "network_firewall" {
   source      = "../firewall"
   name_prefix = var.name_prefix
-  project                               = var.project_name
+  project_name                               = var.project_name
   network                               = google_compute_network.vpc.self_link
   frontend_subnetwork  = google_compute_subnetwork.vpc_subnetwork_frontend.self_link
   backend_subnetwork  = google_compute_subnetwork.vpc_subnetwork_backend.self_link
   db_subnetwork  = google_compute_subnetwork.vpc_subnetwork_db.self_link
+}
+
+# Create the Router and NAT
+
+module "network_router" {
+  source      = "../router"
+  region = var.region
+  name_prefix = var.name_prefix
+  project_name                               = var.project_name
+  vpc = google_compute_network.vpc.self_link
+}
+
+module "network_nat" {
+  source      = "../nat"
+  region = var.region
+  name_prefix = var.name_prefix
+  project_name                               = var.project_name
+  backend_subnetwork = google_compute_subnetwork.vpc_subnetwork_backend.self_link
+  router = module.network_router.router
+}
+
+# Create the VPC Serverless Access
+
+module "vpc_access" {
+  source = "../vpc_access_connector"
+
+  name_prefix = "backend"
+  region = var.region
+  subnet_name = google_compute_subnetwork.vpc_subnetwork_backend.name
 }

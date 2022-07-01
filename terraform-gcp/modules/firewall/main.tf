@@ -21,7 +21,7 @@ locals {
 resource "google_compute_firewall" "frontend_allow_inbound" {
   name = "${var.name_prefix}-frontend-allow-ingress"
 
-  project = var.project
+  project = var.project_name
   network = var.network
 
   target_tags   = [local.frontend]
@@ -41,7 +41,7 @@ resource "google_compute_firewall" "frontend_allow_inbound" {
 resource "google_compute_firewall" "backend_allow_all_network_inbound" {
   name = "${var.name_prefix}-backend-private-allow-ingress"
 
-  project = var.project
+  project = var.project_name
   network = var.network
 
   target_tags = [local.backend]
@@ -65,7 +65,7 @@ resource "google_compute_firewall" "backend_allow_all_network_inbound" {
 resource "google_compute_firewall" "db_allow_restricted_network_inbound" {
   name = "${var.name_prefix}-db-allow-restricted-inbound"
 
-  project = var.project
+  project = var.project_name
   network = var.network
 
   target_tags = [local.db]

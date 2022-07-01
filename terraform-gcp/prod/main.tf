@@ -55,7 +55,7 @@ module "pull_pubsub" {
 module "container_registry" {
   source = "../modules/container_registry"
 
-  project_id = var.project_name
+  project_name = var.project_name
 }
 
 module "cloud_function" {
