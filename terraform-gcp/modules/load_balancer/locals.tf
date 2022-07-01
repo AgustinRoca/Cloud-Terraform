@@ -12,12 +12,6 @@ locals {
       "path_prefix_rewrite" : "/"
     },
     {
-      "service" : "id-service",
-      "type" : "cloud_run",
-      "path" : "/idservice/*",
-      "path_prefix_rewrite" : "/"
-    },
-    {
       "service" : "gpu-service",
       "type" : "cloud_run",
       "path" : "/gpuservice/*",

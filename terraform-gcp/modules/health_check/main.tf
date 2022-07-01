@@ -1,6 +1,7 @@
 # La idea de este modulo es proveer un health check sencillo.
 # Por esto creemos que las configuraciones internas hardcodeadas tienen sentido. 
 # Los valores usados son bastante estandar.
+# No cuenta dentro de los componentes distintos a implementar
 
 resource "google_compute_health_check" "autohealing" {
   name                = var.health_check_name

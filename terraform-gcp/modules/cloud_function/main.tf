@@ -1,3 +1,5 @@
+# La Cloud Function de nuestro proyecto enviaría mail se sube contenido a un buscket especifico
+
 resource "google_storage_bucket" "code_bucket" {
   name     = var.code_bucket_name
   location = var.region
