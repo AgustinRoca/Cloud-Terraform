@@ -59,6 +59,7 @@ module "container_registry" {
   source = "./modules/container_registry"
 
   project_name = var.project_name
+  location     = "US"
 }
 
 module "cloud_function" {
