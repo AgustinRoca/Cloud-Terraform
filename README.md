@@ -9,13 +9,9 @@ Archivos Terraform (Infrastracture as Code) que permiten desplegar algunos de lo
 
 `$> terraform init`
 
-`$> terraform init -upgrade`
-
 `$> terraform validate`
 
 `$> terraform plan`
-
-To add storage permissions, run `$> gcloud projects add-iam-policy-binding <PROJECT-ID> --member='user:<USER_ACCOUNT>' --role='storage.admin'`
 
 `$> terraform apply`
 

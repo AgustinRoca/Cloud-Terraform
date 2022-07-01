@@ -45,10 +45,8 @@ def sendWarningMail(arg1, arg2):
     </body>
     </html>
     """
-    data_arg1 = json.loads(arg1)
-    data_arg2 = json.loads(arg2)
 
-    body_html = MIMEText(html.format(today_date, data_arg1['bucket'], data_arg2['resource']['name']), 'html')  # parse values into html text
+    body_html = MIMEText(html.format(today_date, arg1, arg2), 'html')  # parse values into html text
     msg.attach(body_html)  # attaching the text body into msg
 
     ## Image
