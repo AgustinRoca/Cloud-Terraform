@@ -1,6 +1,6 @@
 # Custom Service Account que se usa para identificar servicios de Google para IAM (manera recomendada por Google)
 resource "google_service_account" "default" {
-  account_id   = "service-account-id"
+  account_id   = "service-account-id-staging"
   display_name = "Service Account"
 }
 
@@ -18,7 +18,7 @@ module "gpu_instance" {
   gpu_template_name = "gpu-template"
 
   # Specs
-  machine_type = "n1-standard-4"
+  machine_type = "n1-standard-2"
   gpu_model    = "nvidia-tesla-t4"
   source_image = "ubuntu-os-cloud/ubuntu-1804-lts" # La aplicacion necesita Ubuntu 18.04 para correr
 
@@ -27,22 +27,6 @@ module "gpu_instance" {
 
   # IAM
   service_account_email = google_service_account.default.email
-}
-
-module "gpu_instance_group" {
-  source = "../modules/gpu_instance_group"
-
-  mig_name          = "mig-gpus"
-  instance_name     = "gpu-instance"
-  instance = module.gpu_instance.instance
-
-  # Networking
-  region  = var.region
-  zones   = var.zones
-
-  # Health
-  autohealing_id = module.health_check.id
-  depends_on     = [module.health_check] # Necesito un health check para linkearlo con el MIG
 }
 
 module "pull_pubsub" {
