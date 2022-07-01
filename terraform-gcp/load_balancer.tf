@@ -1,7 +1,7 @@
 # Diferente al ilustrado por nuestra arquitectura dado que, hasta el momento,
 # API Gateway no es una opción en google_compute_region_network_endpoint_group.
 # https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/compute_region_network_endpoint_group
-# Conectamos entonces a servicios de Cloud Run.
+# Conectamos entonces a Network Endpoint Groups para instancias de Cloud Run.
 
 #################################################################################################################################
 
