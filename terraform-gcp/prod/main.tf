@@ -1,3 +1,7 @@
+# Módulos principales
+
+#################################################################################################################################
+
 # Custom Service Account que se usa para identificar servicios de Google para IAM (manera recomendada por Google)
 resource "google_service_account" "default" {
   account_id   = "service-account-id"
@@ -61,7 +65,7 @@ module "container_registry" {
 module "cloud_function" {
   source = "../modules/cloud_function"
 
-  code_bucket_name  = "code-bucket"
+  code_bucket_name  = format("code-bucket-%s", formatdate("DDMYYYYhhmm",timestamp()))
   region            = var.region
   scripts_file_name = "warning_trigger.py" # Si son varios scripts, puede ser un .zip
   scripts_path      = "./resources/warning_trigger_scripts"
