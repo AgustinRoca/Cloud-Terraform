@@ -32,3 +32,8 @@ variable "cidr_subnetwork_spacing" {
   type        = number
   default     = 0
 }
+
+variable "zones" {
+  description = "All the zones inside the region to use"
+  type        = list(string)
+}

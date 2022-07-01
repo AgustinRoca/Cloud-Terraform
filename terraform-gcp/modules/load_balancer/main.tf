@@ -69,7 +69,7 @@ resource "google_compute_region_network_endpoint_group" "neg" {
 # Path rules customizados mediante bloques dinámicos
 resource "google_compute_url_map" "url-map" {
   name        = "${local.env}-url-map"
-  description = "{local.env}  url mapping for ${local.domain}"
+  description = "${local.env} url mapping for ${local.domain}"
   project     = var.project_name
 
   default_service = module.lb-http.backend_services["image-service"].self_link

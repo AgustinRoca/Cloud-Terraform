@@ -81,4 +81,5 @@ module "network" {
   project_name                           = var.project_name
   region                                 = var.region
   name_prefix                            = var.project_name
+  zones = var.zones
 }

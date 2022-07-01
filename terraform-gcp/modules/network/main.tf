@@ -98,3 +98,13 @@ module "vpc_access" {
   region = var.region
   subnet_name = google_compute_subnetwork.vpc_subnetwork_backend.name
 }
+
+# Create the Frontend LB
+
+module "frontend_lb" {
+  source = "../load_balancer"
+
+  project_name                               = var.project_name
+  zones = var.zones
+  region = var.region
+}

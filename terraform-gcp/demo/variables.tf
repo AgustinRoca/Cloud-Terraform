@@ -9,3 +9,9 @@ variable "region" {
   type        = string
   default     = "us-central1"
 }
+
+variable "zones" {
+  description = "All the zones inside the region to use"
+  type        = list(string)
+  default     = ["us-central1-a", "us-central1-b", "us-central1-c"]
+}
